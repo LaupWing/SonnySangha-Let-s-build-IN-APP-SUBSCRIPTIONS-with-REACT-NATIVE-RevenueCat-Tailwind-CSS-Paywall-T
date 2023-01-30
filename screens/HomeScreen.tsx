@@ -32,6 +32,33 @@ const HomeScreen = () => {
                icon="library"
                vertical
             />
+            <ActionRow
+               title="Connect with Friends"
+               screen="Demo"
+               color="#F44174"
+               icon="share-social"
+            />
+            <ActionRow
+               title="Add an Exercise"
+               screen="Demo"
+               color="#8AC926"
+               icon="add-circle"
+               requiresPro
+            />
+            <ActionRow
+               title="Create a Routine"
+               screen="Demo"
+               color="#C03221"
+               icon="md-time"
+               requiresPro
+            />
+            <ActionRow
+               title="Join Challanges"
+               screen="Demo"
+               color="#23967F"
+               icon="trophy"
+               requiresPro
+            />
          </ScrollView>
       </SafeAreaView>
    )
