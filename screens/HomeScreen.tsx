@@ -25,6 +25,13 @@ const HomeScreen = () => {
                icon="fitness"
                vertical
             />
+            <ActionRow
+               title="Browse Workouts"
+               screen="Demo"
+               color="#1982C4"
+               icon="library"
+               vertical
+            />
          </ScrollView>
       </SafeAreaView>
    )
