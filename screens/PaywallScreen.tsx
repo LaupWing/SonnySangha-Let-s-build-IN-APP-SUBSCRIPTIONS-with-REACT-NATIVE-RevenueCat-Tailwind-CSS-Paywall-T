@@ -47,6 +47,22 @@ const PaywallScreen = () => {
                   </Text>
                </View>
             </View>
+
+            <View className="flex-row space-x-10 items-center">
+               <Ionicons
+                  name="md-person-add-outline"
+                  size={32}
+                  color="#E5962D"
+               />
+               <View className="flex-1">
+                  <Text className="text-white font-bold text-lg">
+                     Helpline 24/7 to Personal Trainers
+                  </Text>
+                  <Text className="text-white text-sm font-extralight">
+                     Get unlimted acccess to our fitness support team and get help anytime you need it - day or night.{" "}
+                  </Text>
+               </View>
+            </View>
          </View>
       </ScrollView>
    )
