@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { SafeAreaView, Text, View } from "react-native"
 import DemoScreen from "./screens/DemoScreen"
 import HomeScreen from "./screens/HomeScreen"
+import PaywallScreen from "./screens/PaywallScreen"
 
 export type RootStackParamsList = {
    Home: undefined
@@ -26,7 +27,15 @@ export default function App() {
                options={{
                   headerShown: false
                }}
-               name="Demo" component={DemoScreen} 
+               name="Demo" 
+               component={DemoScreen} 
+            />
+            <Stack.Screen
+               options={{
+                  headerShown: false
+               }}
+               name="Paywall" 
+               component={PaywallScreen} 
             />
          </Stack.Navigator>
       </NavigationContainer>
