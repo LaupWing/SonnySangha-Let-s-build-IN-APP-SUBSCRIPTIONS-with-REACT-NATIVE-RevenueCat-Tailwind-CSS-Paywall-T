@@ -1,5 +1,5 @@
 import { View, Text, ScrollView, TouchableOpacity } from "react-native"
-import { Ionicons } from "@expo/vector-icons"
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons"
 import { RootStackParamsList } from "../App"
 import { NativeStackNavigationProp } from "@react-navigation/native-stack"
 import { useNavigation } from "@react-navigation/native"
@@ -23,6 +23,7 @@ const PaywallScreen = () => {
             </Text>
          </View>
          <TouchableOpacity
+            className="absolute top-0 right-0 p-5"
             onPress={navigation.goBack}
          >
             <Ionicons
@@ -31,7 +32,16 @@ const PaywallScreen = () => {
                color="#E5962D"
             />
          </TouchableOpacity>
-         <View>
+
+         <View className="items-center">
+            <MaterialCommunityIcons
+               name="trophy-award"
+               size={150}
+               color="#E5962D"
+            />
+         </View>
+
+         <View className="space-y-5 px-10 py-5">
             <View className="flex-row space-x-10 items-center">
                <Ionicons
                   name="md-key"
@@ -79,8 +89,9 @@ const PaywallScreen = () => {
                   </Text>
                </View>
             </View>
-
          </View>
+
+         
       </ScrollView>
    )
 }
