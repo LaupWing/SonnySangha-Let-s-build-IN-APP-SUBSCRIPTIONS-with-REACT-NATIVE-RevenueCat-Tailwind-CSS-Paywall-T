@@ -36,6 +36,17 @@ const useRevenueCat = () => {
       fetchData().catch(console.error)
    },[])
 
-   return null
+   useEffect(() => {
+      const customerInfoUpdated = async (purchaserInfo: CustomerInfo) =>{
+         setCustomerInfo(purchaserInfo)
+      }
+      Purchases.addCustomerInfoUpdateListener(customerInfoUpdated)
+   }, [])
+
+   return {
+      currentOffering,
+      customerInfo,
+      isProMember
+   }
 }
 export default useRevenueCat
