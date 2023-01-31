@@ -63,6 +63,23 @@ const PaywallScreen = () => {
                   </Text>
                </View>
             </View>
+
+            <View className="flex-row space-x-10 items-center">
+               <Ionicons
+                  name="md-star"
+                  size={32}
+                  color="#E5962D"
+               />
+               <View className="flex-1">
+                  <Text className="text-white font-bold text-lg">
+                     Unlock Limited Edition Content
+                  </Text>
+                  <Text className="text-white text-sm font-extralight">
+                     Unlock exclusive content that you can't get anywhere else, like special exlusive workouts and routines
+                  </Text>
+               </View>
+            </View>
+
          </View>
       </ScrollView>
    )
