@@ -32,7 +32,8 @@ export default function App() {
             />
             <Stack.Screen
                options={{
-                  headerShown: false
+                  headerShown: false,
+                  presentation: "modal"
                }}
                name="Paywall" 
                component={PaywallScreen} 
