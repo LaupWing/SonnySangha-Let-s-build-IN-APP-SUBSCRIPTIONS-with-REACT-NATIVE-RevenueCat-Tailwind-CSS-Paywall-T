@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, TouchableOpacity, ActivityIndicator } from "react-native"
+import { View, Text, ScrollView, TouchableOpacity, ActivityIndicator, Alert } from "react-native"
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons"
 import { RootStackParamsList } from "../App"
 import { NativeStackNavigationProp } from "@react-navigation/native-stack"
@@ -25,6 +25,29 @@ const PaywallScreen = () => {
 
       if(purchaseInfo.customerInfo.entitlements.active.pro){
          navigation.goBack()
+      }
+   }
+
+   const handleAnnualPurchase = async () =>{
+      if(!currentOffering?.annual){
+         return
+      }
+      const purchaseInfo = await Purchases.purchasePackage(currentOffering?.annual)
+
+      console.log("YOU BOUGHT THE >>", purchaseInfo.customerInfo.entitlements.active)
+
+      if(purchaseInfo.customerInfo.entitlements.active.pro){
+         navigation.goBack()
+      }
+   }
+
+   const restorePurchases = async () => {
+      const purchaseInfo = await Purchases.restorePurchases()
+
+      if(purchaseInfo.activeSubscriptions.length > 0){
+         Alert.alert("Success", "Your purchase has been restored")
+      }else{
+         Alert.alert("Error", "No purchases to restore")
       }
    }
 
@@ -122,7 +145,29 @@ const PaywallScreen = () => {
             <Text className="text-white text-md text-center font-bold mb-1">FREE trail for 1 week...</Text>
             <Text className="text-white">{currentOffering.monthly?.product.priceString}/month after</Text>
          </TouchableOpacity>
+
+         {currentOffering.annual && (
+            <TouchableOpacity 
+               className="items-center px-10 py-5 bg-[#E5962D] mx-10 rounded-full mt-2"
+               onPress={handleAnnualPurchase}
+            >
+               <Text className="text-white text-md text-center font-bold mb-1">
+                  Save{" "}
+                  {(
+                     (1 -
+                        currentOffering.annual?.product.price! /   
+                        (currentOffering.monthly?.product.price! * 12)
+                     ) * 100
+                  ).toPrecision(2)}
+                  % Annually
+               </Text>
+               <Text className="text-white">{currentOffering.annual?.product.priceString}/year</Text>
+            </TouchableOpacity>
+         )}
          
+         <TouchableOpacity className="m-5" onPress={restorePurchases}>
+            <Text className="text-center text-[#E5962D]">Restore Purchases</Text>
+         </TouchableOpacity>
       </ScrollView>
    )
 }
