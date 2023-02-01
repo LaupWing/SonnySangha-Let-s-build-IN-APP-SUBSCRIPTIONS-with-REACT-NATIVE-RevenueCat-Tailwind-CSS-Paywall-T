@@ -14,7 +14,7 @@ export type NavigationProp = NativeStackNavigationProp<
 
 const HomeScreen = () => {
    const navigation = useNavigation<NavigationProp>()
-   const {} = useRevenueCat()
+   const { isProMember } = useRevenueCat()
 
    return (
       <SafeAreaView className="flex-1 bg-gray-100 relative">
@@ -24,7 +24,12 @@ const HomeScreen = () => {
                onPress={() => navigation.navigate("Paywall")}   
             >
                <Ionicons name="person-circle" size={30} color="#E59620" />
-               <Text className="text-center text-[#E59620]">PRO/UPGRADE</Text>
+               <Text className="text-center text-[#E59620]">{
+                  isProMember 
+                     ? "PRO"
+                     : "UPGRADE"
+                  }
+               </Text>
             </TouchableOpacity>
 
             <Image

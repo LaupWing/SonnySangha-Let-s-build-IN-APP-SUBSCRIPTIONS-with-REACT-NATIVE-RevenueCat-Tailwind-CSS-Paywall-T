@@ -1,8 +1,10 @@
-import { View, Text, ScrollView, TouchableOpacity } from "react-native"
+import { View, Text, ScrollView, TouchableOpacity, ActivityIndicator } from "react-native"
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons"
 import { RootStackParamsList } from "../App"
 import { NativeStackNavigationProp } from "@react-navigation/native-stack"
 import { useNavigation } from "@react-navigation/native"
+import useRevenueCat from "../hooks/useRevenueCat"
+import Purchases from "react-native-purchases"
 
 export type NavigationProp = NativeStackNavigationProp<
    RootStackParamsList,
@@ -11,6 +13,28 @@ export type NavigationProp = NativeStackNavigationProp<
 
 const PaywallScreen = () => {
    const navigation = useNavigation<NavigationProp>()
+   const { currentOffering } = useRevenueCat()
+
+   const handleMonthlyPurchase = async () => {
+      if(!currentOffering?.monthly){
+         return
+      }
+      const purchaseInfo = await Purchases.purchasePackage(currentOffering?.monthly)
+
+      console.log("YOU BOUGHT THE >>", purchaseInfo.customerInfo.entitlements.active)
+
+      if(purchaseInfo.customerInfo.entitlements.active.pro){
+         navigation.goBack()
+      }
+   }
+
+   if(!currentOffering){
+      return (
+         <View className="bg-[#1A2F44] flex-1 p-10">
+            <ActivityIndicator size={"large"} color="#E5962D"/>
+         </View>
+      )
+   }
 
    return (
       <ScrollView className="bg-[#1A2F44] flex-1">
@@ -91,6 +115,13 @@ const PaywallScreen = () => {
             </View>
          </View>
 
+         <TouchableOpacity 
+            className="items-center px-10 py-5 bg-[#E5962D] mx-10 rounded-full"
+            onPress={handleMonthlyPurchase}
+         >
+            <Text className="text-white text-md text-center font-bold mb-1">FREE trail for 1 week...</Text>
+            <Text className="text-white">{currentOffering.monthly?.product.priceString}/month after</Text>
+         </TouchableOpacity>
          
       </ScrollView>
    )
