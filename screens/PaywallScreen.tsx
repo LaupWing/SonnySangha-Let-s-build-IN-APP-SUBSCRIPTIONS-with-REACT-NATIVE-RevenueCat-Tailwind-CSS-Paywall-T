@@ -145,7 +145,11 @@ const PaywallScreen = () => {
             className="items-center px-10 py-5 bg-[#E5962D] mx-10 rounded-full"
             onPress={handleMonthlyPurchase}
          >
-            <Text className="text-white text-md text-center font-bold mb-1">FREE trail for 1 week...</Text>
+            <Text className="text-white text-md text-center font-bold mb-1">
+               START A {" "}
+               {currentOffering.monthly?.product.introPrice?.periodNumberOfUnits} x{" "}
+               {currentOffering.monthly?.product.introPrice?.periodUnit} FREE TRAIL
+            </Text>
             <Text className="text-white">{currentOffering.monthly?.product.priceString}/month after</Text>
          </TouchableOpacity>
 
