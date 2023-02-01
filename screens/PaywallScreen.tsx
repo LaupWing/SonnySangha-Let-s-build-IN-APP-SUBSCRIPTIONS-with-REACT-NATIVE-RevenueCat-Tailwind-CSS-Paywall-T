@@ -49,6 +49,9 @@ const PaywallScreen = () => {
       }else{
          Alert.alert("Error", "No purchases to restore")
       }
+      if(purchaseInfo.entitlements.active.pro){
+         navigation.goBack()
+      }
    }
 
    if(!currentOffering){
